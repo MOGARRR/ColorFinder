@@ -1,0 +1,19 @@
+.container {
+  background-color: red;
+  width: 75vw;
+  height: 75vh;
+  margin: 5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.colorSwatch {
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.colorBlobs{
+  display: flex;
+}
