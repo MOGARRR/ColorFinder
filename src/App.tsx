@@ -2,7 +2,7 @@ import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import Palette from "./components/Palette";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -15,15 +15,7 @@ function App() {
             <h1>Image</h1>
             <Image src="/cet-image.png" fluid />
           </div>
-          <div>
-            <h2>pallete</h2>
-            <div className="pallete">
-              <div id="color1">color</div>
-              <div id="color2">color</div>
-              <div id="color3">color</div>
-              <div id="color4">color</div>
-            </div>
-          </div>
+          <Palette/>
         </section>
         <section className="colorSection">
           <h1>colors</h1>
