@@ -16,4 +16,50 @@
 
 .colorBlobs{
   display: flex;
+  justify-content: space-evenly;
+}
+
+.colorSection {
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+}
+
+.colorType {
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.fileHolder {
+  background-color: pink;
+}
+
+.pallete{
+  background-color: grey;
+  height: 5vh;
+  display: flex;
+  
+}
+
+
+#color1{
+  background-color: paleturquoise;
+  flex: auto;
+}
+
+#color2{
+  background-color: purple;
+  flex: auto;
+}
+
+#color3{
+  background-color: green;
+  flex: auto;
+}
+
+#color4{
+  background-color: yellow;
+  flex: auto;
 }

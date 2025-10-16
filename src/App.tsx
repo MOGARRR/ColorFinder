@@ -1,7 +1,8 @@
 import Image from "react-bootstrap/Image";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import Stack from "react-bootstrap/Stack";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -16,28 +17,40 @@ function App() {
           </div>
           <div>
             <h2>pallete</h2>
-            <ProgressBar>
-              <ProgressBar striped variant="success" now={34} key={1} />
-              <ProgressBar variant="warning" now={34} key={2} />
-              <ProgressBar striped variant="danger" now={34} key={3} />
-            </ProgressBar>
+            <div className="pallete">
+              <div id="color1">color</div>
+              <div id="color2">color</div>
+              <div id="color3">color</div>
+              <div id="color4">color</div>
+            </div>
           </div>
         </section>
-        <section>
+        <section className="colorSection">
           <h1>colors</h1>
           <div className="colorBlobs">
-            <div className="colorSwatch">color</div>
-            <div className="colorSwatch">color</div>
-            <div className="colorSwatch">color</div>
+            <div className="colorSwatch">color selected</div>
+            <div className="colorSwatch">color hovering</div>
           </div>
           <Stack gap={3}>
-            <div className="p-2">HEX</div>
-            <div className="p-2">RGB</div>
-            <div className="p-2">HSL</div>
+            <div className=" colorType p-2">
+              <h5>HEX</h5>
+              <p>#2596be</p>
+              <Button variant="outline-light">Light</Button>
+            </div>
+            <div className=" colorType p-2">
+              <h5>RGB</h5>
+              <p>rgb(37, 150, 190)</p>
+              <Button variant="outline-light">Light</Button>
+            </div>
+            <div className=" colorType p-2">
+              <h5>HSL</h5>
+              <p>hsl(0, 0, 0)</p>
+              <Button variant="outline-light">Light</Button>
+            </div>
           </Stack>
-          <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Large file input example</Form.Label>
-            <Form.Control type="file" size="lg" />
+          <Form.Group controlId="formFileLg" className="mb-3 fileHolder">
+            <Form.Label>Try Your own images!</Form.Label>
+            <Form.Control type="file" />
           </Form.Group>
         </section>
       </div>
