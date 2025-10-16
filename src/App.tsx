@@ -1,8 +1,7 @@
 import Image from "react-bootstrap/Image";
-import Stack from "react-bootstrap/Stack";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Palette from "./components/Palette";
+import ColorRangeTypes from "./components/ColorRangeTypes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -23,23 +22,7 @@ function App() {
             <div className="colorSwatch">color selected</div>
             <div className="colorSwatch">color hovering</div>
           </div>
-          <Stack gap={3}>
-            <div className=" colorType p-2">
-              <h5>HEX</h5>
-              <p>#2596be</p>
-              <Button variant="outline-light">Light</Button>
-            </div>
-            <div className=" colorType p-2">
-              <h5>RGB</h5>
-              <p>rgb(37, 150, 190)</p>
-              <Button variant="outline-light">Light</Button>
-            </div>
-            <div className=" colorType p-2">
-              <h5>HSL</h5>
-              <p>hsl(0, 0, 0)</p>
-              <Button variant="outline-light">Light</Button>
-            </div>
-          </Stack>
+          <ColorRangeTypes/>
           <Form.Group controlId="formFileLg" className="mb-3 fileHolder">
             <Form.Label>Try Your own images!</Form.Label>
             <Form.Control type="file" />
