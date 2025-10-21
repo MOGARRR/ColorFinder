@@ -4,9 +4,11 @@ import ImageFileDrop from "./components/ImageFileDrop";
 import ColorViewers from "./components/ColorViewers";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 function App() {
+  const [hover, setHover] = useState<string>("");
+  const [selected, setSelected] = useState<string>("");
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -37,9 +39,12 @@ function App() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const pixel = ctx.getImageData(x, y, 1, 1).data;
-    const [r, g, b, a] = pixel;
-    console.log(`(${x}, ${y}) = (${r}, ${g}, ${b}, ${a})`);
+    const pixel = ctx.getImageData(x, y, 1, 1);
+    const data = pixel.data;
+    const rgbColor = `rgb(${data[0]} ${data[1]} ${data[2]} / ${data[3] / 255})`;
+    setHover(rgbColor);
+    if (e.type === "click") setSelected(rgbColor);
+    return rgbColor;
   };
 
   return (
@@ -54,13 +59,14 @@ function App() {
               width={300}
               height={300}
               onMouseMove={handleMouse}
+              onClick={handleMouse}
             ></canvas>
           </div>
           <Palette />
         </section>
         <section className="colorSection">
           <h1>colors</h1>
-          <ColorViewers />
+          <ColorViewers hoverColor={hover} selectedColor={selected} />
           <ColorRangeTypes />
           <ImageFileDrop />
         </section>

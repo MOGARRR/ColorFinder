@@ -8,13 +8,14 @@
 }
 
 .colorSwatch {
-  background-color: blue;
+  background-color: white;
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  border: solid 2px black;
 }
 
-.colorBlobs{
+.colorBlobs {
   display: flex;
   justify-content: space-evenly;
 }
@@ -36,30 +37,28 @@
   background-color: pink;
 }
 
-.palette{
+.palette {
   background-color: grey;
   height: 5vh;
   display: flex;
-  
 }
 
-
-#color1{
+#color1 {
   background-color: paleturquoise;
   flex: auto;
 }
 
-#color2{
+#color2 {
   background-color: purple;
   flex: auto;
 }
 
-#color3{
+#color3 {
   background-color: green;
   flex: auto;
 }
 
-#color4{
+#color4 {
   background-color: yellow;
   flex: auto;
 }
