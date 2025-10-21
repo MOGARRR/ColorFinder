@@ -1,4 +1,3 @@
-
 import Palette from "./components/Palette";
 import ColorRangeTypes from "./components/ColorRangeTypes";
 import ImageFileDrop from "./components/ImageFileDrop";
@@ -8,6 +7,7 @@ import "./App.css";
 import React, { useRef, useEffect } from "react";
 
 function App() {
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,7 +33,13 @@ function App() {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    console.log(`(${x}, ${y})`);
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    const [r, g, b, a] = pixel;
+    console.log(`(${x}, ${y}) = (${r}, ${g}, ${b}, ${a})`);
   };
 
   return (
@@ -48,8 +54,7 @@ function App() {
               width={300}
               height={300}
               onMouseMove={handleMouse}
-            >
-            </canvas>
+            ></canvas>
           </div>
           <Palette />
         </section>
