@@ -30,7 +30,10 @@
   background-color: green;
   display: flex;
   justify-content: space-between;
-  margin-top: 1em;
+  margin: .5em;
+  font-size: larger;
+
+
 }
 
 .fileHolder {
@@ -40,6 +43,10 @@
 .palette {
   background-color: grey;
   height: 5vh;
+  display: flex;
+}
+
+.colorInfo{
   display: flex;
 }
 

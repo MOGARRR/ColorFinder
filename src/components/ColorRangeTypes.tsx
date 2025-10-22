@@ -2,7 +2,11 @@ import React from 'react'
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
-const ColorRangeTypes = () => {
+interface ColorRangeTypesProps {
+  rgb: string;
+}
+
+const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb}) => {
   return (
      <Stack gap={3}>
             <div className=" colorType p-2">
@@ -12,7 +16,7 @@ const ColorRangeTypes = () => {
             </div>
             <div className=" colorType p-2">
               <h5>RGB</h5>
-              <p>rgb(37, 150, 190)</p>
+              <p>{rgb}</p>
               <Button variant="outline-light">Light</Button>
             </div>
             <div className=" colorType p-2">

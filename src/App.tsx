@@ -67,7 +67,11 @@ function App() {
         <section className="colorSection">
           <h1>colors</h1>
           <ColorViewers hoverColor={hover} selectedColor={selected} />
-          <ColorRangeTypes />
+          <div className="colorInfo">
+            <ColorRangeTypes rgb={hover} />
+            <ColorRangeTypes rgb={selected} />
+          </div>
+
           <ImageFileDrop />
         </section>
       </div>
