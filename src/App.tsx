@@ -7,8 +7,10 @@ import "./App.css";
 import React, { useRef, useEffect, useState } from "react";
 
 function App() {
-  const [hover, setHover] = useState<string>("");
-  const [selected, setSelected] = useState<string>("");
+  const [hoverRgb, setHoverRgb] = useState<string>("rgb(0 0 0 /1)");
+  const [selectedRgb, setSelectedRgb] = useState<string>("rgb(0 0 0 /1)");
+  const [hoverHex, setHoverHex] = useState<string>("#000000");
+  const [selectedHex, setSelectedHex] = useState<string>("#000000");
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -29,6 +31,17 @@ function App() {
     };
   }, []);
 
+  function rgbToHex(r: any, g: any, b: any) {
+    r = r.toString(16);
+    g = g.toString(16);
+    b = b.toString(16);
+
+    if (r.length == 1) r = "0" + r;
+    if (g.length == 1) g = "0" + g;
+    if (b.length == 1) b = "0" + b;
+
+    return `#${r}${g}${b}`;
+  }
   const handleMouse = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -41,9 +54,14 @@ function App() {
 
     const pixel = ctx.getImageData(x, y, 1, 1);
     const data = pixel.data;
+    const hexColor = rgbToHex(data[0], data[1], data[2]).toUpperCase();
     const rgbColor = `rgb(${data[0]} ${data[1]} ${data[2]} / ${data[3] / 255})`;
-    setHover(rgbColor);
-    if (e.type === "click") setSelected(rgbColor);
+    setHoverHex(hexColor);
+    setHoverRgb(rgbColor);
+    if (e.type === "click") {
+      setSelectedRgb(rgbColor);
+      setSelectedHex(hexColor);
+    }
     return rgbColor;
   };
 
@@ -66,10 +84,10 @@ function App() {
         </section>
         <section className="colorSection">
           <h1>colors</h1>
-          <ColorViewers hoverColor={hover} selectedColor={selected} />
+          <ColorViewers hoverColor={hoverRgb} selectedColor={selectedRgb} />
           <div className="colorInfo">
-            <ColorRangeTypes rgb={hover} />
-            <ColorRangeTypes rgb={selected} />
+            <ColorRangeTypes rgb={hoverRgb} hex={hoverHex} />
+            <ColorRangeTypes rgb={selectedRgb} hex={selectedHex} />
           </div>
 
           <ImageFileDrop />

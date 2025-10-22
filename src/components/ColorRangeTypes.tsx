@@ -4,14 +4,15 @@ import Stack from "react-bootstrap/Stack";
 
 interface ColorRangeTypesProps {
   rgb: string;
+  hex: string;
 }
 
-const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb}) => {
+const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb, hex}) => {
   return (
      <Stack gap={3}>
             <div className=" colorType p-2">
               <h5>HEX</h5>
-              <p>#2596be</p>
+              <p>{hex}</p>
               <Button variant="outline-light">Light</Button>
             </div>
             <div className=" colorType p-2">
