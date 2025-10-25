@@ -5,9 +5,10 @@ import Stack from "react-bootstrap/Stack";
 interface ColorRangeTypesProps {
   rgb: string;
   hex: string;
+  hsl: string
 }
 
-const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb, hex}) => {
+const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb, hex, hsl}) => {
   return (
      <Stack gap={3}>
             <div className=" colorType p-2">
@@ -22,7 +23,7 @@ const ColorRangeTypes:React.FC<ColorRangeTypesProps> = ({rgb, hex}) => {
             </div>
             <div className=" colorType p-2">
               <h5>HSL</h5>
-              <p>hsl(0, 0, 0)</p>
+              <p>{hsl}</p>
               <Button variant="outline-light">Light</Button>
             </div>
           </Stack>

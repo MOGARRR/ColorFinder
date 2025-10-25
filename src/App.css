@@ -1,9 +1,10 @@
 .container {
   background-color: red;
-  width: 75vw;
+  width: 80vw;
   height: 75vh;
   margin: 5em;
   display: flex;
+  justify-self: center;
   justify-content: space-between;
 }
 
@@ -48,6 +49,9 @@
 
 .colorInfo{
   display: flex;
+}
+#canvas{
+  cursor: crosshair;
 }
 
 #color1 {

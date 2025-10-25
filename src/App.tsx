@@ -11,6 +11,9 @@ function App() {
   const [selectedRgb, setSelectedRgb] = useState<string>("rgb(0 0 0 /1)");
   const [hoverHex, setHoverHex] = useState<string>("#000000");
   const [selectedHex, setSelectedHex] = useState<string>("#000000");
+  const [hoverHsl, setHoverHsl] = useState<string>("0°, 0%, 0%");
+  const [selectedHsl, setSelectedHsl] = useState<string>("0°, 0%, 0%");
+  
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -31,7 +34,8 @@ function App() {
     };
   }, []);
 
-  function rgbToHex(r: any, g: any, b: any) {
+  /// COLOR CONVERSIONS ///
+  const rgbToHex = (r: any, g: any, b: any) => {
     r = r.toString(16);
     g = g.toString(16);
     b = b.toString(16);
@@ -41,7 +45,39 @@ function App() {
     if (b.length == 1) b = "0" + b;
 
     return `#${r}${g}${b}`;
-  }
+  };
+
+  const rgbToHsl = (r: any, g: any, b: any) => {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b),
+      cmax = Math.max(r, g, b),
+      delta = cmax - cmin,
+      h = 0,
+      s = 0,
+      l = 0;
+
+    if (delta == 0) h = 0;
+    else if (cmax == r) h = ((g - b) / delta) % 6;
+    else if (cmax == g) h = (b - r) / delta + 2;
+    else h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0) h += 360;
+
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+    s = Math.round(s)
+    l = Math.round(l)
+
+    return `${h}°, ${s}%, ${l}%`;
+  };
+
+  /////////////////////
   const handleMouse = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -54,13 +90,18 @@ function App() {
 
     const pixel = ctx.getImageData(x, y, 1, 1);
     const data = pixel.data;
-    const hexColor = rgbToHex(data[0], data[1], data[2]).toUpperCase();
     const rgbColor = `rgb(${data[0]} ${data[1]} ${data[2]} / ${data[3] / 255})`;
-    setHoverHex(hexColor);
+    const hexColor = rgbToHex(data[0], data[1], data[2]).toUpperCase();
+    const hslColor = rgbToHsl(data[0], data[1], data[2]);
     setHoverRgb(rgbColor);
+    setHoverHex(hexColor);
+    setHoverHsl(hslColor)
+    
     if (e.type === "click") {
+      console.log(hslColor);
       setSelectedRgb(rgbColor);
       setSelectedHex(hexColor);
+      setSelectedHsl(hslColor)
     }
     return rgbColor;
   };
@@ -76,6 +117,7 @@ function App() {
               ref={canvasRef}
               width={300}
               height={300}
+              
               onMouseMove={handleMouse}
               onClick={handleMouse}
             ></canvas>
@@ -86,8 +128,8 @@ function App() {
           <h1>colors</h1>
           <ColorViewers hoverColor={hoverRgb} selectedColor={selectedRgb} />
           <div className="colorInfo">
-            <ColorRangeTypes rgb={hoverRgb} hex={hoverHex} />
-            <ColorRangeTypes rgb={selectedRgb} hex={selectedHex} />
+            <ColorRangeTypes rgb={hoverRgb} hex={hoverHex} hsl={hoverHsl}/>
+            <ColorRangeTypes rgb={selectedRgb} hex={selectedHex} hsl={selectedHsl}/>
           </div>
 
           <ImageFileDrop />
